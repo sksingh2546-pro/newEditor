@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import i18n from 'i18next';
 
 import { Flex } from '../components/flex';
-import Icon from '../components/icon/Icon';
 import { ShortcutHelp } from '../components/help';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPhotoVideo,faGem,faImage,faSurprise ,faFileUpload,faListOl,faRocket,faEye,faWindowClose} from '@fortawesome/free-solid-svg-icons'
+
 
 class Title extends Component {
 	static propTypes = {
@@ -23,19 +25,7 @@ class Title extends Component {
 		}
 	}
 
-	handlers = {
-		goGithub: () => {
-			window.open('https://github.com/salgum1114/react-design-editor');
-		},
-		goDocs: () => {
-			window.open('https://salgum1114.github.io/react-design-editor/docs');
-		},
-		showHelp: () => {
-			this.setState({
-				visible: true,
-			});
-		},
-	};
+
 
 	render() {
 		const { visible } = this.state;
@@ -46,49 +36,21 @@ class Title extends Component {
 				flex="1"
 				alignItems="center"
 			>
-				<Flex style={{ marginLeft: 8 }} flex="0 1 auto">
-					<span style={{ color: '#fff', fontSize: 24, fontWeight: 500 }}>React Design Editor</span>
-					<Tooltip title={i18n.t('action.go-github')} overlayStyle={{ fontSize: 16 }}>
-						<Button
-							className="rde-action-btn"
-							style={{
-								color: 'white',
-							}}
-							shape="circle"
-							size="large"
-							onClick={this.handlers.goGithub}
-						>
-							<Icon name="github" prefix="fab" size={1.5} />
-						</Button>
-					</Tooltip>
-					<Tooltip title={i18n.t('action.go-docs')} overlayStyle={{ fontSize: 16 }}>
-						<Button
-							className="rde-action-btn"
-							style={{
-								color: 'white',
-							}}
-							shape="circle"
-							size="large"
-							onClick={this.handlers.goDocs}
-						>
-							<Icon name="book" prefix="fas" size={1.5} />
-						</Button>
-					</Tooltip>
-					<Tooltip title={i18n.t('action.shortcut-help')} overlayStyle={{ fontSize: 16 }}>
-						<Button
-							className="rde-action-btn"
-							style={{
-								color: 'white',
-							}}
-							shape="circle"
-							size="large"
-							onClick={this.handlers.showHelp}
-						>
-							<Icon name="question" prefix="fas" size={1.5} />
-						</Button>
-					</Tooltip>
+				<Flex  flex="0 1 auto" style={{marginLeft:"5px"}}>
+                    <Menu
+                        mode="horizontal"
+                        theme="dark"
+                        style={{ background: 'Red', fontSize: '16px' }}
+                        onClick={this.props.onChangeMenu}
+                        selectedKeys={[this.props.current]}
+
+                    >
+                        <Menu.Item  style={{ color: '#fff' }}>
+                            <FontAwesomeIcon icon={faWindowClose} />
+                        </Menu.Item>
+                    </Menu>
 				</Flex>
-				<Flex style={{ marginLeft: 88 }}>
+				<Flex style={{ textAlign: "center" ,width:"75%",justifyContent:"center"}}>
 					<Menu
 						mode="horizontal"
 						theme="dark"
@@ -96,25 +58,57 @@ class Title extends Component {
 						onClick={this.props.onChangeMenu}
 						selectedKeys={[this.props.current]}
 					>
-						<Menu.Item key="imagemap" style={{ color: '#fff' }}>
-							{i18n.t('imagemap.imagemap')}
+						<Menu.Item  style={{ color: '#fff' }}>
+                            <FontAwesomeIcon icon={faPhotoVideo} /> Assets
 						</Menu.Item>
-						<Menu.Item key="workflow" style={{ color: '#fff' }}>
-							{i18n.t('workflow.workflow')}
+						<Menu.Item  style={{ color: '#fff' }}>
+                            <FontAwesomeIcon icon={faImage} />  Unsplash
 						</Menu.Item>
+
+                        <Menu.Item  style={{ color: '#fff' }}>
+                            <FontAwesomeIcon icon={faSurprise}/> Giphy
+                        </Menu.Item>
+				        <Menu.Item  style={{ color: '#fff' }}>
+                            <FontAwesomeIcon icon={faFileUpload}/> Pixabay
+                        </Menu.Item>
+					 <Menu.Item  style={{ color: '#fff' }}>
+                         <FontAwesomeIcon icon={faListOl}/>  Playlist
+                        </Menu.Item>
+
+                        <Menu.Item  style={{ color: '#fff' }}>
+                            <FontAwesomeIcon icon={faGem}/> Plugin
+                        </Menu.Item>
 						{/* <Menu.Item key="flow" style={{ color: '#fff' }}>{i18n.t('flow.flow')}</Menu.Item> */}
 						{/* <Menu.Item key="hexgrid" style={{ color: '#fff' }}>
 							{i18n.t('hexgrid.hexgrid')}
 						</Menu.Item> */}
 					</Menu>
 				</Flex>
-				<Flex flex="1" justifyContent="flex-end">
-					<ins
-						className="adsbygoogle"
-						style={{ display: 'inline-block', width: 600, height: 60 }}
-						data-ad-client="ca-pub-8569372752842198"
-						data-ad-slot="5790685139"
-					/>
+				<Flex flex="1" justifyContent="flex-end" >
+                    <Menu
+                        mode="horizontal"
+                        theme="dark"
+                        style={{ background: 'orange', fontSize: '16px' }}
+                        onClick={this.props.onChangeMenu}
+                        selectedKeys={[this.props.current]}
+                    >
+
+                        <Menu.Item  style={{ color: '#fff' }}>
+                            <FontAwesomeIcon icon={faEye}/> Preview
+                        </Menu.Item>
+                    </Menu>
+                    <Menu
+                        mode="horizontal"
+                        theme="dark"
+                        style={{ background: 'green', fontSize: '16px' }}
+                        onClick={this.props.onChangeMenu}
+                        selectedKeys={[this.props.current]}
+                    >
+
+                        <Menu.Item  style={{ color: '#fff' }}>
+                            <FontAwesomeIcon icon={faRocket}/> Publish
+                        </Menu.Item>
+                    </Menu>
 				</Flex>
 				<Modal
 					visible={visible}

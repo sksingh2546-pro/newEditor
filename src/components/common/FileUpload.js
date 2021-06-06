@@ -12,7 +12,7 @@ class FileUpload extends Component {
 	};
 
 	static defaultProps = {
-		limit: 5,
+		limit: 1000,
 	};
 
 	state = {
